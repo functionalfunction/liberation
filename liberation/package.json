@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:clean": "cd android && ./gradlew clean && cd ..",
+    "android:build": "react-native bundle --entry-file index.js --platform android --dev false --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res/",
+    "android:release": "npm run android:build && cd android && ./gradlew bundleRelease -x bundleReleaseJsAndAssets && cd ..",
+    "android:apk": "npm run android:build && cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && cd ..",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",

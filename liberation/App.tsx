@@ -45,6 +45,7 @@ const App = () => {
   );
 }
 
+
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,

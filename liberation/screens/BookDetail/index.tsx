@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { LoggedInStackParamList } from '../../navigation/LoggedInNavigator';
 
-const App = () => {
+
+const BookDetailScreen = () => {
   
   const [books, setBooks] = useState([{title:'', id:''}]);
 
   useEffect(() => {
     console.log('useEffect')
-    fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => response.json())
       .then(json => setBooks(json.slice(0, 20)))
   }, []);
@@ -88,4 +83,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;
+export default BookDetailScreen;

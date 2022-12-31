@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { LoggedInStackParamList } from '../../navigation/LoggedInNavigator';
 
-const App = () => {
+
+type Prop = StackNavigationProp<LoggedInStackParamList, 'BookDetailScreen'>;
+type Props = { navigation: Prop; route: RouteProp<LoggedInStackParamList, 'BookDetailScreen'>; };
+
+const BookListScreen = ({navigation, route}: Props) => {
   
   const [books, setBooks] = useState([{title:'', id:''}]);
 
@@ -88,4 +86,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;
+export default BookListScreen;

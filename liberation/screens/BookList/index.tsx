@@ -5,8 +5,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { LoggedInStackParamList } from '../../navigation/LoggedInNavigator';
 
 
-type Prop = StackNavigationProp<LoggedInStackParamList, 'BookDetailScreen'>;
-type Props = { navigation: Prop; route: RouteProp<LoggedInStackParamList, 'BookDetailScreen'>; };
+type Prop = StackNavigationProp<LoggedInStackParamList, 'BookListScreen'>;
+type Props = { navigation: Prop; route: RouteProp<LoggedInStackParamList, 'BookListScreen'>; };
 
 const BookListScreen = ({navigation, route}: Props) => {
   
@@ -19,6 +19,15 @@ const BookListScreen = ({navigation, route}: Props) => {
       .then(json => setBooks(json.slice(0, 20)))
   }, []);
 
+  const goToBookDetail = (id: string) => {
+    const book = books?.find(book => book.id === id);
+    console.log(book)
+    if (book) {
+        navigation.navigate('BookDetailScreen', { book });
+    }
+
+  };
+
   return (
     <>
       <StatusBar></StatusBar>
@@ -29,7 +38,7 @@ const BookListScreen = ({navigation, route}: Props) => {
           </View>
           <ScrollView>
             {books.map((book) => (
-              <TouchableOpacity style={styles.bookItemContainer} key={book.id}>
+              <TouchableOpacity style={styles.bookItemContainer} key={book.id} onPress={() => goToBookDetail(book.id)}>
                 <Image source={{uri: "https://placehold.co/600x400/png"}} style={styles.bookImage}></Image>
                 <Text style={styles.bookItemText}>{book.title.substring(0, 30)}</Text>
               </TouchableOpacity>

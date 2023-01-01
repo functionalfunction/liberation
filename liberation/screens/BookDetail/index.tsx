@@ -1,39 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import {Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react';
+import {Image, SafeAreaView, StatusBar, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { LoggedInStackParamList } from '../../navigation/LoggedInNavigator';
 
+type Prop = StackNavigationProp<LoggedInStackParamList, 'BookDetailScreen'>;
+type Props = { navigation: Prop; route: RouteProp<LoggedInStackParamList, 'BookDetailScreen'>; };
 
-const BookDetailScreen = () => {
-  
-  const [books, setBooks] = useState([{title:'', id:''}]);
+const BookDetailScreen = ({ navigation, route}: Props) => {
+
+  const { book } = route.params;
+
+  const goBack = () => {
+    navigation.goBack();
+  };
 
   useEffect(() => {
-    console.log('useEffect')
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => response.json())
-      .then(json => setBooks(json.slice(0, 20)))
+    console.log(book);
   }, []);
-
+  
   return (
+
     <>
       <StatusBar></StatusBar>
-      <SafeAreaView style={styles.safeAreaView}>
-        <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>My Library</Text>
-          </View>
-          <ScrollView>
-            {books.map((book) => (
-              <TouchableOpacity style={styles.bookItemContainer} key={book.id}>
-                <Image source={{uri: "https://placehold.co/600x400/png"}} style={styles.bookImage}></Image>
-                <Text style={styles.bookItemText}>{book.title.substring(0, 30)}</Text>
+        <SafeAreaView style={styles.safeAreaView}>
+          <View style={styles.container}>
+            <View style={styles.headerContainer}>
+              <TouchableOpacity onPress={goBack}>
+                <FontAwesomeIcon icon={faArrowLeft} color="#293462" size={20}></FontAwesomeIcon>
               </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-      </SafeAreaView>
+              <Text style={styles.headerText}>{book.id}</Text>
+            </View>
+            <View style={styles.bookItemContainer}>
+              <Text style={styles.bookItemText}>{book.title}</Text>
+            </View>
+          </View>
+        </SafeAreaView>
     </>
 
   );
@@ -66,8 +70,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#293462',
  },
  bookItemText: {
     fontFamily: "Raleway-Regular",

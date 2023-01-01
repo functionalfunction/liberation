@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import {Image, SafeAreaView, StatusBar, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { LoggedInStackParamList } from '../../navigation/LoggedInNavigator';
 
 type Prop = StackNavigationProp<LoggedInStackParamList, 'BookDetailScreen'>;
